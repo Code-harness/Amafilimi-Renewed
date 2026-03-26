@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -6,6 +6,25 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans:
+        "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+}
+
+:root {
+    --color-body-bg: rgb(2, 33, 48);
+    --color-nav-start: rgb(0, 0, 0);
+    --color-nav-middle: rgba(3, 19, 26, 0.5);
+    --color-nav-end: rgba(0, 0, 0, 0.1);
+    --color-hero-overlay: rgba(255, 255, 255, 0.25);
+
+    --color-action: rgb(4, 145, 23);
+    --color-action-hover: rgb(5, 170, 27);
+    --color-action-glow: rgba(4, 145, 23, 0.3);
+}
+
+body {
+    background-color: var(--color-body-bg);
+    color: #ffffff;
 }
