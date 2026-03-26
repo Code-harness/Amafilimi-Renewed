@@ -3,7 +3,8 @@
 @section('title', '403 - Restricted Access')
 
 @section('content')
-    <div class="relative h-[70vh] min-h-[550px] flex items-center justify-center px-6 overflow-hidden bg-[var(--color-body-bg)]">
+    <div
+        class="relative h-[70vh] min-h-[550px] flex items-center justify-center px-6 overflow-hidden bg-[var(--color-body-bg)]">
 
         <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-600/10 rounded-full blur-[120px] animate-pulse"></div>
         <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-yellow-900/10 rounded-full blur-[150px]"></div>
@@ -24,20 +25,25 @@
                 </div>
 
                 <p class="text-gray-400 text-xs md:text-base font-medium leading-relaxed max-w-sm mx-auto opacity-75">
-                    It looks like you're trying to enter a restricted area. This scene is reserved for authorized personnel or requires a different ticket.
+                    It looks like you're trying to enter a restricted area. This scene is reserved for authorized personnel
+                    or requires a different ticket.
                 </p>
             </div>
 
             <div class="flex flex-col md:flex-row items-center justify-center gap-4 mt-10 md:mt-12">
                 <a href="/login"
                     class="group relative px-10 py-4 bg-amber-600 rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl shadow-amber-600/20">
-                    <span class="relative z-10 font-black uppercase text-[11px] tracking-widest text-white flex items-center gap-2">
+                    <span
+                        class="relative z-10 font-black uppercase text-[11px] tracking-widest text-white flex items-center gap-2">
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                            <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/>
+                            <path
+                                d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z" />
                         </svg>
                         Show Your Credentials
                     </span>
-                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                    <div
+                        class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    </div>
                 </a>
 
                 <a href="/"
@@ -57,8 +63,17 @@
 
     <style>
         @keyframes pulse-slow {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.05); }
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.05);
+            }
         }
 
         .animate-pulse {
