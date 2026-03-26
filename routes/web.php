@@ -40,9 +40,27 @@ Route::get('/manage-movies', function () {
 })->name('admin.manage.movies');
 
 
+Route::get('/create-movie', function () {
+    return view('admin.manage-movie.add-movie');
+})->name('admin.create.movies');
+
+
 Route::get('/manage-series', function () {
     return view('admin.manage-series.index');
 })->name('admin.manage.series');
+
+Route::get('/create-serie', function () {
+    return view('admin.manage-series.add-serie');
+})->name('admin.create.serie');
+
+Route::get('/create-season', function () {
+    return view('admin.manage-series.create-season');
+})->name('admin.create.season');
+
+
+Route::get('/create-episode', function () {
+    return view('admin.manage-series.create-episode');
+})->name('admin.create.episode');
 
 Route::get('/manage-users', function () {
     return view('admin.manage-users.index');
