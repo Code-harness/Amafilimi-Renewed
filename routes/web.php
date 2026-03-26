@@ -23,3 +23,7 @@ Route::get('/series', function () {
 Route::get('/series/details', function () {
     return view('users.series-details');
 })->name('user.series.details');
+
+Route::get('/watch', function () {
+    return view('users.players');
+})->name('user.player');
