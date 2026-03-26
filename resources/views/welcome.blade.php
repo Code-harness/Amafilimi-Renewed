@@ -37,6 +37,18 @@
         ['title' => 'The Whale', 'sub' => '2022 • Drama', 'rating' => '7.7', 'img' => 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=300'],
         ['title' => 'Blade Runner 2049', 'sub' => '2017 • Sci-Fi', 'rating' => '8.0', 'img' => 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=300'],
         ['title' => 'Top Gun: Maverick', 'sub' => '2022 • Action', 'rating' => '8.3', 'img' => 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=300'],
+        ['title' => 'The Wonder', 'sub' => '2022 • Mystery', 'rating' => '6.8', 'img' => 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=300'],
+        ['title' => 'Interstellar', 'sub' => '2014 • Sci-Fi', 'rating' => '9.0', 'img' => 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=300'],
+        ['title' => 'Inception', 'sub' => '2010 • Sci-Fi', 'rating' => '8.8', 'img' => 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=300'],
+        ['title' => 'The Whale', 'sub' => '2022 • Drama', 'rating' => '7.7', 'img' => 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=300'],
+        ['title' => 'Blade Runner 2049', 'sub' => '2017 • Sci-Fi', 'rating' => '8.0', 'img' => 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=300'],
+        ['title' => 'Top Gun: Maverick', 'sub' => '2022 • Action', 'rating' => '8.3', 'img' => 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=300'],
+        ['title' => 'The Wonder', 'sub' => '2022 • Mystery', 'rating' => '6.8', 'img' => 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=300'],
+        ['title' => 'Interstellar', 'sub' => '2014 • Sci-Fi', 'rating' => '9.0', 'img' => 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=300'],
+        ['title' => 'Inception', 'sub' => '2010 • Sci-Fi', 'rating' => '8.8', 'img' => 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=300'],
+        ['title' => 'The Whale', 'sub' => '2022 • Drama', 'rating' => '7.7', 'img' => 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=300'],
+        ['title' => 'Blade Runner 2049', 'sub' => '2017 • Sci-Fi', 'rating' => '8.0', 'img' => 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=300'],
+        ['title' => 'Top Gun: Maverick', 'sub' => '2022 • Action', 'rating' => '8.3', 'img' => 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=300'],
     ];
 @endphp
 
@@ -48,16 +60,16 @@
 
         {{-- Hero Carousel Section --}}
         <section x-data="{ 
-                            active: 0, 
-                            total: {{ count($carouselItems) }},
-                            autoplayInterval: null,
-                            init() { this.startAutoplay(); },
-                            startAutoplay() { this.autoplayInterval = setInterval(() => { this.next(); }, 6000); },
-                            stopAutoplay() { clearInterval(this.autoplayInterval); },
-                            next() { this.active = (this.active + 1) % this.total },
-                            prev() { this.active = (this.active - 1 + this.total) % this.total }
-                        }" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
-            class="relative h-[550px] md:h-[650px] w-full overflow-hidden shadow-2xl group transition-all duration-700"
+                                    active: 0, 
+                                    total: {{ count($carouselItems) }},
+                                    autoplayInterval: null,
+                                    init() { this.startAutoplay(); },
+                                    startAutoplay() { this.autoplayInterval = setInterval(() => { this.next(); }, 6000); },
+                                    stopAutoplay() { clearInterval(this.autoplayInterval); },
+                                    next() { this.active = (this.active + 1) % this.total },
+                                    prev() { this.active = (this.active - 1 + this.total) % this.total }
+                                }" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
+            class="relative h-[550px] md:h-[750px] w-full overflow-hidden shadow-2xl group transition-all duration-700"
             style="background-color: var(--color-body-bg);">
 
             @foreach($carouselItems as $index => $item)
@@ -129,15 +141,15 @@
 
         {{-- Latest Releases Section --}}
         <section class="w-full px-6 md:px-16 lg:px-24">
-            <div class="flex justify-between items-end mb-10">
+            <div class="flex justify-between items-end mb-8">
                 <div class="space-y-1">
-                    <h2 class="text-xl md:text-3xl font-black tracking-tighter uppercase text-white leading-none">
+                    <h2 class="text-xl md:text-2xl font-black tracking-tighter uppercase text-white leading-none">
                         Latest Releases
                     </h2>
-                    <div class="h-[3px] w-12 bg-[var(--color-action)]"></div>
+                    <div class="h-[2px] w-10 bg-[var(--color-action)]"></div>
                 </div>
                 <a href="#"
-                    class="group flex items-center gap-2 text-[10px] font-bold text-gray-500 hover:text-[var(--color-action)] uppercase tracking-[0.2em] transition-all">
+                    class="group flex items-center gap-2 text-[9px] font-bold text-gray-500 hover:text-[var(--color-action)] uppercase tracking-[0.2em] transition-all">
                     Explore All
                     <svg class="w-3 h-3 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
@@ -146,29 +158,43 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
+            <div class="flex overflow-x-auto gap-4 md:gap-6 pb-8 snap-x snap-mandatory scrollbar-hide no-scrollbar">
                 @foreach($movies as $movie)
-                    <div class="group cursor-pointer relative">
-                        {{-- Card Container: Reduced Radius (rounded-xl/2xl) --}}
+                    <div class="group cursor-pointer relative flex-none w-[140px] md:w-[180px] snap-start">
+
+                        {{-- Card Container --}}
                         <div
-                            class="relative aspect-[2/3] rounded-xl md:rounded-2xl overflow-hidden bg-gray-900 border border-white/10 mb-3 transition-all duration-500 
-                                    group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.7)] group-hover:border-[var(--color-action)]/30">
+                            class="relative aspect-[2/3] rounded-lg md:rounded-xl overflow-hidden bg-gray-900 border border-white/5 mb-3 transition-all duration-500 
+                                            group-hover:-translate-y-2 group-hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.8)] group-hover:border-[var(--color-action)]/40">
+
+                            {{-- Translator Tag (New) --}}
+                            @if(isset($movie['translator']))
+                                <div
+                                    class="absolute top-2 right-2 z-30 flex items-center gap-1 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/10 shadow-lg">
+                                    <svg class="w-2 h-2 text-[var(--color-action)] fill-current" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z" />
+                                    </svg>
+                                    <span
+                                        class="text-[7px] font-black text-white/90 uppercase tracking-tighter">{{ $movie['translator'] }}</span>
+                                </div>
+                            @endif
 
                             {{-- Poster Image --}}
                             <img src="{{ $movie['img'] }}"
-                                class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1">
+                                class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110">
 
                             {{-- Hover Glow Overlay --}}
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity">
                             </div>
 
-                            {{-- Play Icon (Modern Minimalist) --}}
+                            {{-- Minimal Play Icon --}}
                             <div
                                 class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
                                 <div
-                                    class="w-12 h-12 rounded-full bg-[var(--color-action)] text-white flex items-center justify-center shadow-[0_0_20px_var(--color-action-glow)] transform scale-75 group-hover:scale-100 transition-transform duration-500">
-                                    <svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24">
+                                    class="w-10 h-10 rounded-full bg-[var(--color-action)] text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-500">
+                                    <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z" />
                                     </svg>
                                 </div>
@@ -176,8 +202,8 @@
 
                             {{-- Floating Rating Badge --}}
                             <div
-                                class="absolute top-3 left-3 flex items-center gap-1.5 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md border border-white/10 text-[9px] font-black text-white shadow-lg">
-                                <svg class="w-2.5 h-2.5 text-[var(--color-action)] fill-current" viewBox="0 0 24 24">
+                                class="absolute top-2 left-2 flex items-center gap-1 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded border border-white/10 text-[8px] font-black text-white shadow-lg">
+                                <svg class="w-2 h-2 text-[var(--color-action)] fill-current" viewBox="0 0 24 24">
                                     <path
                                         d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2l-2.81 6.63L2 9.24l5.46 4.73L5.82 21z" />
                                 </svg>
@@ -188,15 +214,15 @@
                         {{-- Title Info --}}
                         <div class="px-1 space-y-0.5">
                             <h3
-                                class="text-[13px] md:text-sm font-bold truncate text-white/90 group-hover:text-[var(--color-action)] transition-colors duration-300">
+                                class="text-[11px] md:text-xs font-bold truncate text-white/90 group-hover:text-[var(--color-action)] transition-colors duration-300">
                                 {{ $movie['title'] }}
                             </h3>
-                            <div class="flex items-center gap-2 overflow-hidden">
-                                <p class="text-[9px] text-gray-500 font-bold uppercase tracking-wider truncate shrink-0">
+                            <div class="flex items-center gap-1.5 overflow-hidden">
+                                <p class="text-[8px] text-gray-500 font-bold uppercase tracking-wider truncate shrink-0">
                                     {{ explode(' • ', $movie['sub'])[0] }}
                                 </p>
-                                <span class="w-1 h-1 rounded-full bg-gray-700"></span>
-                                <p class="text-[9px] text-[var(--color-action)] font-black uppercase truncate italic">
+                                <span class="w-0.5 h-0.5 rounded-full bg-gray-700 shrink-0"></span>
+                                <p class="text-[8px] text-[var(--color-action)] font-black uppercase truncate italic">
                                     {{ explode(' • ', $movie['sub'])[1] ?? 'Action' }}
                                 </p>
                             </div>
@@ -205,6 +231,18 @@
                 @endforeach
             </div>
         </section>
+
+        <style>
+            /* Utility to hide scrollbar while keeping functionality */
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        </style>
 
     </div>
 
