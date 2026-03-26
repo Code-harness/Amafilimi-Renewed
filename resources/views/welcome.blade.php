@@ -43,100 +43,157 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="space-y-12 pb-8 pt-4">
+    {{-- Main Container: Removed px-2, added larger vertical gap --}}
+    <div class="space-y-20 pb-20 w-full">
 
+        {{-- Hero Carousel Section --}}
         <section x-data="{ 
-                    active: 0, 
-                    total: {{ count($carouselItems) }},
-                    autoplayInterval: null,
-                    init() { this.startAutoplay(); },
-                    startAutoplay() { this.autoplayInterval = setInterval(() => { this.next(); }, 5000); },
-                    stopAutoplay() { clearInterval(this.autoplayInterval); },
-                    next() { this.active = (this.active + 1) % this.total },
-                    prev() { this.active = (this.active - 1 + this.total) % this.total }
-                }" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
-            class="relative h-[480px] rounded-[3rem] overflow-hidden shadow-2xl mx-2 group"
+                        active: 0, 
+                        total: {{ count($carouselItems) }},
+                        autoplayInterval: null,
+                        init() { this.startAutoplay(); },
+                        startAutoplay() { this.autoplayInterval = setInterval(() => { this.next(); }, 6000); },
+                        stopAutoplay() { clearInterval(this.autoplayInterval); },
+                        next() { this.active = (this.active + 1) % this.total },
+                        prev() { this.active = (this.active - 1 + this.total) % this.total }
+                    }" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
+            class="relative h-[550px] md:h-[650px] w-full overflow-hidden shadow-2xl group transition-all duration-700"
             style="background-color: var(--color-body-bg);">
-            
+
             @foreach($carouselItems as $index => $item)
                 <div x-show="active === {{ $index }}" x-transition:enter="transition ease-out duration-1000"
-                    x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100"
-                    class="absolute inset-0">
+                    x-transition:enter-start="opacity-0 scale-110" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0" class="absolute inset-0">
 
-                    <img src="{{ $item['image'] }}" class="absolute inset-0 w-full h-full object-cover">
+                    {{-- Image with subtle parallax feel --}}
+                    <img src="{{ $item['image'] }}" class="absolute inset-0 w-full h-full object-cover origin-center">
 
-                    <div class="absolute inset-0 z-10" style="background-color: var(--color-hero-overlay);"></div>
+                    {{-- Multi-layered Cinematic Overlays --}}
+                    <div class="absolute inset-0 z-10 bg-black/20"></div>
+                    <div
+                        class="absolute inset-0 z-20 bg-gradient-to-r from-[var(--color-body-bg)] via-[var(--color-body-bg)]/40 to-transparent">
+                    </div>
+                    <div
+                        class="absolute inset-0 z-20 bg-gradient-to-t from-[var(--color-body-bg)] via-transparent to-transparent">
+                    </div>
 
-                    <div class="absolute inset-0 z-20 bg-gradient-to-r from-[rgb(2,33,48)] via-[rgb(2,33,48)]/40 to-transparent"></div>
-                    <div class="absolute inset-0 z-20 bg-gradient-to-t from-[rgb(2,33,48)] via-transparent to-transparent"></div>
-
-                    <div class="absolute bottom-10 left-10 max-w-xl z-30">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-[rgb(4,145,23)] text-white text-[9px] font-black px-2 py-0.5 rounded-md uppercase shadow-lg shadow-[rgb(4,145,23)]/20">
-                               ★ {{ $item['rating'] }} IMDB
+                    {{-- Content: Increased padding for "Space" --}}
+                    <div class="absolute bottom-16 left-6 md:left-16 lg:left-24 max-w-2xl z-30">
+                        <div class="flex items-center gap-4 mb-5">
+                            <span
+                                class="bg-[var(--color-action)] text-white text-[10px] font-black px-3 py-1 rounded-md uppercase shadow-xl shadow-[var(--color-action)]/20">
+                                ★ {{ $item['rating'] }} IMDB
                             </span>
-                            <span class="text-green-500 font-bold text-[11px] tracking-wide">{{ $item['tags'] }}</span>
+                            <span
+                                class="text-[var(--color-action)] font-black text-[11px] tracking-[0.2em] uppercase">{{ $item['tags'] }}</span>
                         </div>
-                        
-                        <h1 class="text-4xl md:text-5xl font-black mb-3 tracking-tighter leading-none uppercase text-white">
+
+                        <h1
+                            class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tighter leading-[0.9] uppercase text-white drop-shadow-2xl">
                             {{ $item['title'] }}
                         </h1>
-                        
-                        <p class="text-gray-200 text-sm leading-relaxed mb-6 line-clamp-2 opacity-90">
+
+                        <p
+                            class="text-gray-200 text-base md:text-lg leading-relaxed mb-8 line-clamp-3 opacity-80 font-medium max-w-xl">
                             {{ $item['desc'] }}
                         </p>
 
-                        <div class="flex items-center gap-3">
-                            <button class="bg-[rgb(4,145,23)] hover:bg-[rgb(5,170,27)] px-8 py-3 rounded-xl font-black transition-all duration-300 shadow-lg shadow-[rgb(4,145,23)]/20 hover:shadow-[rgb(4,145,23)]/40 uppercase text-[11px] tracking-widest text-white">
+                        <div class="flex items-center gap-4">
+                            <button
+                                class="bg-white text-black hover:bg-[var(--color-action)] hover:text-white px-10 py-4 rounded-xl font-black transition-all duration-300 shadow-2xl uppercase text-[12px] tracking-widest active:scale-95">
                                 Watch Now
                             </button>
-                            
-                            <button class="p-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[rgb(4,145,23)] hover:text-[rgb(4,145,23)] transition-all duration-300 text-white">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="2.5" stroke-linecap="round"/></svg>
+
+                            <button
+                                class="p-4 rounded-xl bg-white/10 backdrop-blur-xl border border-white/10 hover:border-[var(--color-action)] hover:text-[var(--color-action)] transition-all duration-300 text-white group/btn">
+                                <svg class="w-6 h-6 group-hover/btn:scale-110 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 4v16m8-8H4" stroke-width="3" stroke-linecap="round" />
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
             @endforeach
 
-            <div class="absolute bottom-10 right-10 flex flex-col gap-2 z-40">
+            {{-- Navigation Indicators: Moved to far right with more space --}}
+            <div class="absolute bottom-16 right-8 md:right-16 flex flex-col gap-3 z-40">
                 @foreach($carouselItems as $index => $item)
                     <button @click="active = {{ $index }}"
-                        :class="active === {{ $index }} ? 'h-6 bg-[rgb(4,145,23)] shadow-[0_0_12px_rgb(4,145,23)]' : 'h-2 bg-white/20'"
-                        class="w-1 rounded-full transition-all duration-500"></button>
+                        :class="active === {{ $index }} ? 'h-10 bg-[var(--color-action)] shadow-[0_0_15px_var(--color-action)]' : 'h-3 bg-white/20 hover:bg-white/40'"
+                        class="w-1.5 rounded-full transition-all duration-500"></button>
                 @endforeach
             </div>
         </section>
 
-        <section class="px-2">
-            <div class="flex justify-between items-end mb-6">
-                <h2 class="text-xl font-black tracking-tight uppercase border-l-4 border-[rgb(4,145,23)] pl-4 text-white">Latest Releases</h2>
-                <a href="#" class="text-[10px] font-bold text-gray-400 hover:text-green-500 uppercase tracking-widest transition">See All</a>
+        {{-- Latest Releases Section --}}
+        <section class="w-full px-6 md:px-16 lg:px-24">
+            <div class="flex justify-between items-center mb-10">
+                <div class="space-y-1">
+                    <h2 class="text-2xl md:text-4xl font-black tracking-tighter uppercase text-white">Latest Releases</h2>
+                    <div class="h-1 w-20 bg-[var(--color-action)] rounded-full"></div>
+                </div>
+                <a href="#"
+                    class="group flex items-center gap-2 text-[11px] font-black text-gray-500 hover:text-[var(--color-action)] uppercase tracking-[0.2em] transition">
+                    Explore All
+                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path d="M9 5l7 7-7 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
                 @foreach($movies as $movie)
                     <div class="group cursor-pointer">
-                        <div class="relative aspect-[2/3] rounded-[2rem] overflow-hidden bg-slate-900/50 border border-white/5 mb-2 shadow-lg">
+                        {{-- Movie Card: Increased Border Radius for a more "Modern" look --}}
+                        <div
+                            class="relative aspect-[2/3] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-gray-800 border border-white/5 mb-4 shadow-xl group-hover:shadow-[var(--color-action)]/10 transition-all duration-500">
                             <img src="{{ $movie['img'] }}"
-                                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition duration-700">
+                                class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition duration-700">
 
-                            <div class="absolute inset-0 bg-[rgb(4,145,23)]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <div class="w-12 h-12 rounded-full bg-[rgb(4,145,23)] flex items-center justify-center shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            {{-- Smooth Play Overlay --}}
+                            <div
+                                class="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                                <div
+                                    class="w-16 h-16 rounded-full bg-[var(--color-action)] flex items-center justify-center shadow-2xl transform scale-50 group-hover:scale-100 transition-all duration-500">
+                                    <svg class="w-8 h-8 text-white fill-current ml-1" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
                                 </div>
                             </div>
 
-                            <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-lg border border-white/5 text-[9px] font-black italic text-white">
+                            <div
+                                class="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 text-[10px] font-black text-white shadow-lg">
                                 {{ $movie['rating'] }}
                             </div>
                         </div>
-                        <h3 class="text-xs font-bold truncate text-white group-hover:text-green-500 transition px-1">
-                            {{ $movie['title'] }}</h3>
-                        <p class="text-[9px] text-gray-500 uppercase tracking-tighter px-1">{{ $movie['sub'] }}</p>
+
+                        <div class="px-2 space-y-1">
+                            <h3
+                                class="text-sm md:text-base font-bold truncate text-white group-hover:text-[var(--color-action)] transition duration-300">
+                                {{ $movie['title'] }}
+                            </h3>
+                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest opacity-70">
+                                {{ $movie['sub'] }}</p>
+                        </div>
                     </div>
                 @endforeach
             </div>
         </section>
+
     </div>
+
+    {{-- Hide scrollbar for clean horizontal feeling --}}
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 @endsection

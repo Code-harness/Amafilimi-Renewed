@@ -5,3 +5,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/movies', function () {
+    return view('users.all-movies');
+})->name('user.movies');
+
+Route::get('/movies/details', function () {
+    return view('users.movie-details');
+})->name('user.movies.details');
+
+Route::get('/series', function () {
+    return view('users.all-series');
+})->name('user.series');
+
+
+Route::get('/series/details', function () {
+    return view('users.series-details');
+})->name('user.series.details');

@@ -15,7 +15,7 @@
 
     <x-navigations></x-navigations>
 
-    <main class="container mx-auto px-4 py-8">
+    <main class="w-full">
         @yield('content')
     </main>
 
