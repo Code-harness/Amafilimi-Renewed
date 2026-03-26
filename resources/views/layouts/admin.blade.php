@@ -30,11 +30,11 @@
         :class="sidebarOpen ? 'w-64' : 'w-20'">
 
         <div class="h-16 flex items-center px-6 gap-3 overflow-hidden whitespace-nowrap">
-            <div class="w-8 h-8 bg-emerald-500 rounded-lg shrink-0 flex items-center justify-center">
-                <div class="w-4 h-4 bg-white rounded-sm rotate-45"></div>
+            <div class="w-8 h-8 rounded-lg shrink-0 flex items-center justify-center">
+                <img src="{{ asset('images/logo.png') }}" alt="">
             </div>
             <span class="font-black text-white tracking-tighter text-xl transition-opacity duration-300"
-                :class="sidebarOpen ? 'opacity-100' : 'opacity-0'">CORESTREAM</span>
+                :class="sidebarOpen ? 'opacity-100' : 'opacity-0'">AMAFILIMI</span>
         </div>
 
         <nav class="flex-1 px-4 py-6 space-y-2">

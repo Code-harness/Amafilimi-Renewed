@@ -47,3 +47,7 @@ Route::get('/manage-series', function () {
 Route::get('/manage-users', function () {
     return view('admin.manage-users.index');
 })->name('admin.manage.users');
+
+Route::get('/create-user', function () {
+    return view('admin.manage-users.create-user');
+})->name('admin.create.users');
