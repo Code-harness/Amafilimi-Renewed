@@ -34,3 +34,16 @@ Route::get('/watch', function () {
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
+
+Route::get('/manage-movies', function () {
+    return view('admin.manage-movie.index');
+})->name('admin.manage.movies');
+
+
+Route::get('/manage-series', function () {
+    return view('admin.manage-series.index');
+})->name('admin.manage.series');
+
+Route::get('/manage-users', function () {
+    return view('admin.manage-users.index');
+})->name('admin.manage.users');
