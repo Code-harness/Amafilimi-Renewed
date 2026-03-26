@@ -48,15 +48,15 @@
 
         {{-- Hero Carousel Section --}}
         <section x-data="{ 
-                        active: 0, 
-                        total: {{ count($carouselItems) }},
-                        autoplayInterval: null,
-                        init() { this.startAutoplay(); },
-                        startAutoplay() { this.autoplayInterval = setInterval(() => { this.next(); }, 6000); },
-                        stopAutoplay() { clearInterval(this.autoplayInterval); },
-                        next() { this.active = (this.active + 1) % this.total },
-                        prev() { this.active = (this.active - 1 + this.total) % this.total }
-                    }" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
+                            active: 0, 
+                            total: {{ count($carouselItems) }},
+                            autoplayInterval: null,
+                            init() { this.startAutoplay(); },
+                            startAutoplay() { this.autoplayInterval = setInterval(() => { this.next(); }, 6000); },
+                            stopAutoplay() { clearInterval(this.autoplayInterval); },
+                            next() { this.active = (this.active + 1) % this.total },
+                            prev() { this.active = (this.active - 1 + this.total) % this.total }
+                        }" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
             class="relative h-[550px] md:h-[650px] w-full overflow-hidden shadow-2xl group transition-all duration-700"
             style="background-color: var(--color-body-bg);">
 
@@ -129,54 +129,77 @@
 
         {{-- Latest Releases Section --}}
         <section class="w-full px-6 md:px-16 lg:px-24">
-            <div class="flex justify-between items-center mb-10">
+            <div class="flex justify-between items-end mb-10">
                 <div class="space-y-1">
-                    <h2 class="text-2xl md:text-4xl font-black tracking-tighter uppercase text-white">Latest Releases</h2>
-                    <div class="h-1 w-20 bg-[var(--color-action)] rounded-full"></div>
+                    <h2 class="text-xl md:text-3xl font-black tracking-tighter uppercase text-white leading-none">
+                        Latest Releases
+                    </h2>
+                    <div class="h-[3px] w-12 bg-[var(--color-action)]"></div>
                 </div>
                 <a href="#"
-                    class="group flex items-center gap-2 text-[11px] font-black text-gray-500 hover:text-[var(--color-action)] uppercase tracking-[0.2em] transition">
+                    class="group flex items-center gap-2 text-[10px] font-bold text-gray-500 hover:text-[var(--color-action)] uppercase tracking-[0.2em] transition-all">
                     Explore All
-                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor"
+                    <svg class="w-3 h-3 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
-                        <path d="M9 5l7 7-7 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 5l7 7-7 7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
                 @foreach($movies as $movie)
-                    <div class="group cursor-pointer">
-                        {{-- Movie Card: Increased Border Radius for a more "Modern" look --}}
+                    <div class="group cursor-pointer relative">
+                        {{-- Card Container: Reduced Radius (rounded-xl/2xl) --}}
                         <div
-                            class="relative aspect-[2/3] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-gray-800 border border-white/5 mb-4 shadow-xl group-hover:shadow-[var(--color-action)]/10 transition-all duration-500">
-                            <img src="{{ $movie['img'] }}"
-                                class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition duration-700">
+                            class="relative aspect-[2/3] rounded-xl md:rounded-2xl overflow-hidden bg-gray-900 border border-white/10 mb-3 transition-all duration-500 
+                                    group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.7)] group-hover:border-[var(--color-action)]/30">
 
-                            {{-- Smooth Play Overlay --}}
+                            {{-- Poster Image --}}
+                            <img src="{{ $movie['img'] }}"
+                                class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1">
+
+                            {{-- Hover Glow Overlay --}}
                             <div
-                                class="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                                class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity">
+                            </div>
+
+                            {{-- Play Icon (Modern Minimalist) --}}
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
                                 <div
-                                    class="w-16 h-16 rounded-full bg-[var(--color-action)] flex items-center justify-center shadow-2xl transform scale-50 group-hover:scale-100 transition-all duration-500">
-                                    <svg class="w-8 h-8 text-white fill-current ml-1" viewBox="0 0 24 24">
+                                    class="w-12 h-12 rounded-full bg-[var(--color-action)] text-white flex items-center justify-center shadow-[0_0_20px_var(--color-action-glow)] transform scale-75 group-hover:scale-100 transition-transform duration-500">
+                                    <svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z" />
                                     </svg>
                                 </div>
                             </div>
 
+                            {{-- Floating Rating Badge --}}
                             <div
-                                class="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 text-[10px] font-black text-white shadow-lg">
+                                class="absolute top-3 left-3 flex items-center gap-1.5 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md border border-white/10 text-[9px] font-black text-white shadow-lg">
+                                <svg class="w-2.5 h-2.5 text-[var(--color-action)] fill-current" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2l-2.81 6.63L2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
                                 {{ $movie['rating'] }}
                             </div>
                         </div>
 
-                        <div class="px-2 space-y-1">
+                        {{-- Title Info --}}
+                        <div class="px-1 space-y-0.5">
                             <h3
-                                class="text-sm md:text-base font-bold truncate text-white group-hover:text-[var(--color-action)] transition duration-300">
+                                class="text-[13px] md:text-sm font-bold truncate text-white/90 group-hover:text-[var(--color-action)] transition-colors duration-300">
                                 {{ $movie['title'] }}
                             </h3>
-                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest opacity-70">
-                                {{ $movie['sub'] }}</p>
+                            <div class="flex items-center gap-2 overflow-hidden">
+                                <p class="text-[9px] text-gray-500 font-bold uppercase tracking-wider truncate shrink-0">
+                                    {{ explode(' • ', $movie['sub'])[0] }}
+                                </p>
+                                <span class="w-1 h-1 rounded-full bg-gray-700"></span>
+                                <p class="text-[9px] text-[var(--color-action)] font-black uppercase truncate italic">
+                                    {{ explode(' • ', $movie['sub'])[1] ?? 'Action' }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 @endforeach
