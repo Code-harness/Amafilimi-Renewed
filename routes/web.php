@@ -27,3 +27,10 @@ Route::get('/series/details', function () {
 Route::get('/watch', function () {
     return view('users.players');
 })->name('user.player');
+
+
+// Dashboard
+
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->name('admin.dashboard');
