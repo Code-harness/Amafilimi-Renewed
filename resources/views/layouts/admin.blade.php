@@ -103,6 +103,8 @@
         </main>
     </div>
 
+    <x-toast.alert></x-toast.alert>
+
 </body>
 
 </html>

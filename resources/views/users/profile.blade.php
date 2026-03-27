@@ -93,7 +93,7 @@
                                 session on this device</p>
                         </div>
 
-                        <form action="#" method="POST" class="w-full sm:w-auto">
+                        <form action="{{ route('logout') }}" method="POST" class="w-full sm:w-auto">
                             @csrf
                             <button type="submit"
                                 class="w-full px-8 py-3 border-2 border-red-50 hover:bg-red-50 text-red-600 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
