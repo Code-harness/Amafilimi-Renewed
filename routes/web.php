@@ -41,15 +41,12 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 
-Route::get('/manage-movies', function () {
-    return view('admin.manage-movie.index');
-    
-})->name('admin.manage.movies');
+Route::get('/manage-movies', [MovieController::class,'show_index'])->name('admin.manage.movies');
 
 
-Route::get('/create-movie', [MovieController::class, 'create'])->name('admin.create.movie');
+Route::get('/create-movie', [MovieController::class, 'create'])->name('movies.create');
 
-Route::post('/create-movie', [MovieController::class, 'store'])->name('admin.create.movies');
+Route::post('/create-movie', [MovieController::class, 'store'])->name('movies.create');
 
 
 

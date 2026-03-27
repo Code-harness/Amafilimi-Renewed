@@ -11,16 +11,16 @@ use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
-        /**
+    /**
      * Show movie upload form
      */
+    public function show_index()
+    {
+        // Fetch movies with content, latest first, 12 per page
+        $movies = Movie::with('content')->orderByDesc('created_at')->paginate(12);
 
-        public function show_index(){
-
-        $movies 
-
-
-        }
+        return view('admin.manage-movie.index', compact('movies'));
+    }
 
 
     /**
