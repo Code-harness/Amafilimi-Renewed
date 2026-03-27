@@ -11,30 +11,29 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('subscriptions', function (Blueprint $table) {
-            Schema::create('subscriptions', function (Blueprint $table) {
-                $table->id();
+            $table->id();
 
-                $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-                $table->foreignId('subscription_plan_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('subscription_plan_id')->constrained()->cascadeOnDelete();
 
-                $table->enum('status', ['active', 'pending', 'expired', 'cancelled'])->default('active');
+            $table->enum('status', ['active', 'pending', 'expired', 'cancelled'])->default('active');
 
-                $table->date('start_date')->nullable();
-                $table->date('end_date')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
 
-                $table->decimal('amount_paid', 10, 2)->default(0);
-                $table->string('payment_method')->nullable(); // momo, card, manual
-                $table->string('payment_reference')->nullable();
+            $table->decimal('amount_paid', 10, 2)->default(0);
+            $table->string('payment_method')->nullable(); // momo, card, manual
+            $table->string('payment_reference')->nullable();
 
-                $table->boolean('auto_renew')->default(false);
-                $table->boolean('is_current')->default(true);
+            $table->boolean('auto_renew')->default(false);
+            $table->boolean('is_current')->default(true);
 
-                // Optional: admin who created this manually
-                $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            // Optional: admin who created this manually
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 
-                $table->timestamps();
-            });
+            $table->timestamps();
         });
     }
 
