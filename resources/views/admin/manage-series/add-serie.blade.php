@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <form action="#" method="POST" class="space-y-8">
+    <form action="{{ route('series.create') }}" method="POST" class="space-y-8">
         @csrf
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">

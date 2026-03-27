@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Content\MovieController;
+use App\Http\Controllers\Content\SerieController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
@@ -50,13 +51,10 @@ Route::post('/create-movie', [MovieController::class, 'store'])->name('movies.cr
 
 
 
-Route::get('/manage-series', function () {
-    return view('admin.manage-series.index');
-})->name('admin.manage.series');
+Route::get('/manage-series', [SerieController::class,'index'])->name('series.index');
 
-Route::get('/create-serie', function () {
-    return view('admin.manage-series.add-serie');
-})->name('admin.create.serie');
+Route::get('/create-serie',[SerieController::class,'create'])->name('series.create');
+Route::post('/create-serie',[SerieController::class,'store'])->name('series.create');
 
 Route::get('/create-season', function () {
     return view('admin.manage-series.create-season');
