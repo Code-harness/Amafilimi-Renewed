@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Content\MovieController;
+use App\Http\Controllers\Content\SeasonController;
 use App\Http\Controllers\Content\SerieController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
@@ -42,7 +43,7 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 
-Route::get('/manage-movies', [MovieController::class,'show_index'])->name('admin.manage.movies');
+Route::get('/manage-movies', [MovieController::class, 'show_index'])->name('admin.manage.movies');
 
 
 Route::get('/create-movie', [MovieController::class, 'create'])->name('movies.create');
@@ -51,14 +52,14 @@ Route::post('/create-movie', [MovieController::class, 'store'])->name('movies.cr
 
 
 
-Route::get('/manage-series', [SerieController::class,'index'])->name('series.index');
+Route::get('/manage-series', [SerieController::class, 'index'])->name('series.index');
 
-Route::get('/create-serie',[SerieController::class,'create'])->name('series.create');
-Route::post('/create-serie',[SerieController::class,'store'])->name('series.create');
+Route::get('/create-serie', [SerieController::class, 'create'])->name('series.create');
+Route::post('/create-serie', [SerieController::class, 'store'])->name('series.create');
 
-Route::get('/create-season', function () {
-    return view('admin.manage-series.create-season');
-})->name('admin.create.season');
+Route::get('/create-season', [SeasonController::class,'create'])->name('season.create');
+
+Route::post('/create-season', [SeasonController::class,'store'])->name('seasons.store');
 
 
 Route::get('/create-episode', function () {
