@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\View;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,6 +28,10 @@ Route::get('/series/details', function () {
 Route::get('/watch', function () {
     return view('users.players');
 })->name('user.player');
+
+Route::get('/profile',function(){
+    return View('users.profile');
+})->name('user.profile');
 
 
 // Dashboard
