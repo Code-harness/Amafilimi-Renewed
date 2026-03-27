@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Content\EpisodeController;
 use App\Http\Controllers\Content\MovieController;
 use App\Http\Controllers\Content\SeasonController;
 use App\Http\Controllers\Content\SerieController;
@@ -62,9 +63,9 @@ Route::get('/create-season', [SeasonController::class,'create'])->name('season.c
 Route::post('/create-season', [SeasonController::class,'store'])->name('seasons.store');
 
 
-Route::get('/create-episode', function () {
-    return view('admin.manage-series.create-episode');
-})->name('admin.create.episode');
+Route::get('/create-episode/{season}', [EpisodeController::class,'create'])->name('admin.create.episode');
+Route::post('/create-episode', [EpisodeController::class,'store'])->name('admin.episodes.store');
+
 
 Route::get('/manage-users', function () {
     return view('admin.manage-users.index');
