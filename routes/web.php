@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Content\MovieController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
@@ -29,7 +30,7 @@ Route::get('/watch', function () {
     return view('users.players');
 })->name('user.player');
 
-Route::get('/profile',function(){
+Route::get('/profile', function () {
     return View('users.profile');
 })->name('user.profile');
 
@@ -42,12 +43,14 @@ Route::get('/dashboard', function () {
 
 Route::get('/manage-movies', function () {
     return view('admin.manage-movie.index');
+    
 })->name('admin.manage.movies');
 
 
-Route::get('/create-movie', function () {
-    return view('admin.manage-movie.add-movie');
-})->name('admin.create.movies');
+Route::get('/create-movie', [MovieController::class, 'create'])->name('admin.create.movie');
+
+Route::post('/create-movie', [MovieController::class, 'store'])->name('admin.create.movies');
+
 
 
 Route::get('/manage-series', function () {
