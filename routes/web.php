@@ -69,3 +69,6 @@ Route::get('/manage-users', function () {
 Route::get('/create-user', function () {
     return view('admin.manage-users.create-user');
 })->name('admin.create.users');
+
+
+include __DIR__ . '/auth.php';

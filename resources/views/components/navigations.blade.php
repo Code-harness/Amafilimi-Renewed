@@ -9,8 +9,8 @@
             </a>
 
             <div class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-[0.2em] text-gray-300">
-                <a href="#" class="hover:text-[rgb(4,145,23)] transition-all">Movies</a>
-                <a href="#" class="hover:text-[rgb(4,145,23)] transition-all">TV Series</a>
+                <a href="{{ route('user.movies') }}" class="hover:text-[rgb(4,145,23)] transition-all">Movies</a>
+                <a href="{{ route('user.series') }}" class="hover:text-[rgb(4,145,23)] transition-all">TV Series</a>
                 <a href="#" class="hover:text-[rgb(4,145,23)] transition-all">Anime</a>
             </div>
         </div>
@@ -27,14 +27,27 @@
             </div>
 
             <div class="flex items-center gap-3 pl-4 border-l border-white/10">
-                <div class="hidden lg:block text-right">
-                    <p class="text-[10px] font-bold text-white leading-none">Manzi Kevin</p>
-                    <p class="text-[9px] text-[rgb(4,145,23)] font-medium">Premium</p>
-                </div>
-                <button
-                    class="w-9 h-9 rounded-xl bg-gradient-to-br from-[rgb(4,145,23)] to-[rgb(3,110,18)] flex items-center justify-center font-black text-xs text-white shadow-lg shadow-[rgb(4,145,23)]/20 border border-white/10 transition-transform active:scale-90">
-                    MK
-                </button>
+                @if(Auth::check())
+                    <div class="hidden lg:block text-right">
+                        <p class="text-[10px] font-bold text-white leading-none">{{ Auth::user()->name }}</p>
+                        <p class="text-[9px] text-[rgb(4,145,23)] font-medium uppercase tracking-tighter">Premium</p>
+                    </div>
+                    <a href="/profile"
+                        class="w-9 h-9 rounded-xl bg-gradient-to-br from-[rgb(4,145,23)] to-[rgb(3,110,18)] flex items-center justify-center font-black text-xs text-white shadow-lg shadow-[rgb(4,145,23)]/20 border border-white/10 transition-transform active:scale-90 uppercase">
+                        {{ substr(Auth::user()->name, 0, 2) }}
+                    </a>
+                @else
+                    <div class="flex items-center gap-4">
+                        <a href="/login"
+                            class="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white transition-colors">
+                            Login
+                        </a>
+                        <a href="/register"
+                            class="hidden sm:block px-5 py-2 rounded-lg bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-white hover:bg-[rgb(4,145,23)] hover:border-[rgb(4,145,23)] transition-all active:scale-95">
+                            Join Now
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -51,7 +64,7 @@
             <span class="text-[9px] font-bold uppercase tracking-tighter text-white">Home</span>
         </a>
 
-        <a href="#"
+        <a href="{{ route('user.movies') }}"
             class="flex flex-col items-center gap-1 group text-gray-500 hover:text-[rgb(4,145,23)] transition-colors">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4" stroke-width="2" stroke-linecap="round" />
@@ -60,13 +73,13 @@
         </a>
 
         <button
-            class="relative -mt-10 bg-[rgb(4,145,23)] w-14 h-14 rounded-full border-4 border-[var(--color-body-bg)] flex items-center justify-center shadow-xl shadow-[rgb(4,145,23)]/40 text-white active:scale-95 transition-transform">
+            class="relative -mt-10 bg-[rgb(4,145,23)] w-14 h-14 rounded-full border-4 border-black flex items-center justify-center shadow-xl shadow-[rgb(4,145,23)]/40 text-white active:scale-95 transition-transform">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="3" stroke-linecap="round" />
             </svg>
         </button>
 
-        <a href="#"
+        <a href="{{ route('user.series') }}"
             class="flex flex-col items-center gap-1 group text-gray-500 hover:text-[rgb(4,145,23)] transition-colors">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M4.5 2h15a2 2 0 012 2v12a2 2 0 01-2 2h-15a2 2 0 01-2-2V4a2 2 0 012-2zM8 20h8M12 18v2"
@@ -75,14 +88,15 @@
             <span class="text-[9px] font-bold uppercase tracking-tighter">Series</span>
         </a>
 
-        <a href="#"
+        <a href="{{ Auth::check() ? '/profile' : '/login' }}"
             class="flex flex-col items-center gap-1 group text-gray-500 hover:text-[rgb(4,145,23)] transition-colors">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-width="2"
                     stroke-linecap="round" />
             </svg>
-            <span class="text-[9px] font-bold uppercase tracking-tighter">Profile</span>
+            <span class="text-[9px] font-bold uppercase tracking-tighter">
+                {{ Auth::check() ? 'Profile' : 'Sign In' }}
+            </span>
         </a>
     </div>
 </div>
-</nav>
