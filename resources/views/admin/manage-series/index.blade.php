@@ -69,7 +69,7 @@
 
                             <td class="p-6 text-right">
                                 <div class="flex items-center justify-end gap-3">
-                                    <a href="{{ route('series.manage', $series->id) }}"
+                                    <a href="{{ route('admin.series.manage', $series->id) }}"
                                         class="px-5 py-2.5 bg-slate-900 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-sm">
                                         Manage Series
                                     </a>
@@ -121,7 +121,7 @@
                     </div>
 
                     <div class="flex gap-3">
-                        <a href="{{ route('series.manage', $series->id) }}"
+                        <a href="{{ route('admin.series.manage', $series->id) }}"
                             class="flex-1 text-center px-4 py-3 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-emerald-600 transition-all">
                             Manage Series
                         </a>

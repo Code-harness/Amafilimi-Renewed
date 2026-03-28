@@ -4,7 +4,6 @@ use App\Http\Controllers\Content\EpisodeController;
 use App\Http\Controllers\Content\MovieController;
 use App\Http\Controllers\Content\SeasonController;
 use App\Http\Controllers\Content\SerieController;
-use App\Http\Controllers\Content\SeriesManagementController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
@@ -56,7 +55,7 @@ Route::post('/create-movie', [MovieController::class, 'store'])->name('movies.cr
 
 Route::get('/manage-series', [SerieController::class, 'index'])->name('series.index');
 
-Route::get('/series/{series}/manage', [SeriesManagementController::class, 'show'])->name('series.manage');
+Route::get('/series/{series}/manage', [SerieController::class, 'manage'])->name('series.manage');
 
 // Seasons under a series
 Route::post('/series/{series}/seasons', [SeasonController::class, 'store'])->name('series.seasons.store');
@@ -90,3 +89,4 @@ Route::get('/create-user', function () {
 
 
 include __DIR__ . '/auth.php';
+include __DIR__.'/admin.php';

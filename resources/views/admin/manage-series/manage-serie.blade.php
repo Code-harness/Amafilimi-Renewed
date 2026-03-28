@@ -21,12 +21,12 @@
                 </div>
 
                 <div class="flex gap-3">
-                    <a href="{{ route('#') }}"
+                    <a href="#"
                         class="px-5 py-3 border border-slate-200 rounded-2xl font-black text-[10px] uppercase tracking-widest text-slate-600 hover:bg-slate-100 transition-all">
                         Back
                     </a>
 
-                    <a href="{{ route('#', $series->id) }}"
+                    <a href="#"
                         class="px-5 py-3 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-emerald-600 transition-all">
                         Edit Series
                     </a>
@@ -43,7 +43,7 @@
                 </p>
             </div>
 
-            <form action="#" method="POST" class="grid md:grid-cols-2 gap-5">
+            <form action="{{ route('admin.series.seasons.store',$series->id) }}" method="POST" class="grid md:grid-cols-2 gap-5">
                 @csrf
 
                 <div>
@@ -122,7 +122,7 @@
                                 Manage Episodes
                             </a>
 
-                            <a href="{{ route('#', $season->id) }}"
+                            <a href="{{ route('admin.seasons.episodes.index', $season->id) }}"
                                 class="px-5 py-3 border border-slate-200 rounded-2xl font-black text-[10px] uppercase tracking-widest text-slate-600 hover:bg-slate-100 transition-all">
                                 Edit
                             </a>
