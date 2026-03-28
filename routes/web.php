@@ -4,6 +4,7 @@ use App\Http\Controllers\Content\EpisodeController;
 use App\Http\Controllers\Content\MovieController;
 use App\Http\Controllers\Content\SeasonController;
 use App\Http\Controllers\Content\SerieController;
+use App\Http\Controllers\Content\SeriesManagementController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
@@ -55,16 +56,28 @@ Route::post('/create-movie', [MovieController::class, 'store'])->name('movies.cr
 
 Route::get('/manage-series', [SerieController::class, 'index'])->name('series.index');
 
+Route::get('/series/{series}/manage', [SeriesManagementController::class, 'show'])->name('series.manage');
+
+// Seasons under a series
+Route::post('/series/{series}/seasons', [SeasonController::class, 'store'])->name('series.seasons.store');
+Route::delete('/series/{series}/seasons/{season}', [SeasonController::class, 'destroy'])->name('series.seasons.destroy');
+
+// Episodes under a season
+Route::get('/seasons/{season}/episodes', [EpisodeController::class, 'index'])->name('seasons.episodes.index');
+Route::post('/seasons/{season}/episodes', [EpisodeController::class, 'store'])->name('seasons.episodes.store');
+Route::delete('/seasons/{season}/episodes/{episode}', [EpisodeController::class, 'destroy'])->name('seasons.episodes.destroy');
+
+
 Route::get('/create-serie', [SerieController::class, 'create'])->name('series.create');
 Route::post('/create-serie', [SerieController::class, 'store'])->name('series.create');
 
-Route::get('/create-season', [SeasonController::class,'create'])->name('season.create');
+Route::get('/create-season', [SeasonController::class, 'create'])->name('season.create');
 
-Route::post('/create-season', [SeasonController::class,'store'])->name('seasons.store');
+Route::post('/create-season', [SeasonController::class, 'store'])->name('seasons.store');
 
 
-Route::get('/create-episode/{season}', [EpisodeController::class,'create'])->name('admin.create.episode');
-Route::post('/create-episode', [EpisodeController::class,'store'])->name('admin.episodes.store');
+Route::get('/create-episode/{season}', [EpisodeController::class, 'create'])->name('admin.create.episode');
+Route::post('/create-episode', [EpisodeController::class, 'store'])->name('admin.episodes.store');
 
 
 Route::get('/manage-users', function () {

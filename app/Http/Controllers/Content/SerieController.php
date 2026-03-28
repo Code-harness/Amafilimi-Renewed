@@ -10,17 +10,31 @@ use Illuminate\Support\Str;
 
 class SerieController extends Controller
 {
-
+    /**
+     * Display all series
+     */
     public function index()
     {
-        $seriesList = Serie::with(['content'])
+        $seriesList = Serie::with([
+            'content',
+            'seasons.episodes'
+        ])
             ->withCount('seasons')
-            ->withCount(['episodes as total_episodes'])
             ->latest()
             ->paginate(10);
 
+        // Add total episodes manually
+        $seriesList->getCollection()->transform(function ($serie) {
+            $serie->total_episodes = $serie->seasons->sum(fn($season) => $season->episodes->count());
+            return $serie;
+        });
+
         return view('admin.manage-series.index', compact('seriesList'));
     }
+
+    /**
+     * Show create series form
+     */
     public function create()
     {
         return view('admin.manage-series.add-serie');
@@ -47,29 +61,42 @@ class SerieController extends Controller
             'is_free'       => 'sometimes|boolean',
         ]);
 
-        // Create Content first
+        // Create shared content record
         $content = Content::create([
-            'title'       => $request->title,
-            'slug'        => $request->slug ?: Str::slug($request->title),
-            'description' => $request->description,
-            'genre'       => $request->genre,
+            'title'         => $request->title,
+            'slug'          => $request->slug ?: Str::slug($request->title),
+            'description'   => $request->description,
+            'genre'         => $request->genre,
             'thumbnail_url' => $request->thumbnail_url,
             'poster_url'    => $request->poster_url,
-            'visibility'  => $request->visibility,
-            'status'      => $request->status,
-            'is_featured' => $request->has('is_featured'),
-            'is_free'     => $request->has('is_free'),
+            'visibility'    => $request->visibility,
+            'status'        => $request->status,
+            'is_featured'   => $request->has('is_featured'),
+            'is_free'       => $request->has('is_free'),
         ]);
 
-        // Then create the Series
+        // Create series-specific record
         $series = Serie::create([
-            'content_id'  => $content->id,
-            'trailer_url' => $request->trailer_url,
+            'content_id'   => $content->id,
+            'trailer_url'  => $request->trailer_url,
             'release_year' => $request->release_year,
-            'language'    => $request->language,
+            'language'     => $request->language,
         ]);
 
         return redirect()->route('series.index')
             ->with('success', 'Series created successfully!');
+    }
+
+    /**
+     * Show one series management page
+     */
+    public function manage(Serie $series)
+    {
+        $series->load([
+            'content',
+            'seasons.episodes'
+        ]);
+
+        return view('admin.manage-series.manage-serie', compact('series'));
     }
 }
